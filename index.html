@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RIG MASTER - Cyber Industrial Fintech Dashboard</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Chart.js CDN -->
+    <!-- Chart.js CDN for Real-time Charting -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -43,607 +40,240 @@
     </script>
 
     <style>
-        /* Custom Styling & Cyber Animations */
-        body {
-            background-color: #030712;
-            color: #f3f4f6;
-            overflow-x: hidden;
-        }
-
-        /* Neon Glow Utility Effects */
-        .neon-glow-cyan {
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.25), inset 0 0 10px rgba(0, 240, 255, 0.05);
-        }
-        .neon-border-cyan {
-            border: 1px solid rgba(0, 240, 255, 0.3);
-        }
-        .neon-text-cyan {
-            color: #00f0ff;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-        }
-        .neon-text-amber {
-            color: #ffb703;
-            text-shadow: 0 0 10px rgba(255, 183, 3, 0.4);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #070c18;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(0, 240, 255, 0.3);
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00f0ff;
-        }
-
-        /* Radar Pulse Animation */
-        @keyframes pulse-cyan {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.05); }
-        }
-        .pulse-live {
-            animation: pulse-cyan 2s infinite ease-in-out;
-        }
+        body { background-color: #030712; color: #f3f4f6; overflow-x: hidden; }
+        .neon-border-cyan { border: 1px solid rgba(0, 240, 255, 0.3); }
+        .neon-text-cyan { color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.5); }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #070c18; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.3); border-radius: 3px; }
+        @keyframes pulse-cyan { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.05); } }
+        .pulse-live { animation: pulse-cyan 2s infinite ease-in-out; }
     </style>
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col justify-between">
 
     <!-- Top Navigation Bar -->
-    <header class="sticky top-0 z-40 bg-cyber-dark/95 backdrop-blur-md border-b border-cyber-border px-4 lg:px-8 py-3 transition-all duration-200">
+    <header class="sticky top-0 z-40 bg-cyber-dark/95 backdrop-blur-md border-b border-cyber-border px-4 lg:px-8 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            
-            <!-- Brand & Status -->
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg overflow-hidden border border-cyber-cyan shadow-[0_0_10px_rgba(0,240,255,0.4)] flex-shrink-0">
-                    <img src="image_80b923.jpg" alt="Rig Master Platform" class="w-full h-full object-cover">
+                <div class="w-10 h-10 rounded-lg overflow-hidden border border-cyber-cyan shadow-[0_0_10px_rgba(0,240,255,0.4)] flex-shrink-0 flex items-center justify-center bg-slate-900">
+                    <i class="fa-solid fa-microchip text-cyber-cyan text-xl"></i>
                 </div>
                 <div>
                     <div class="flex items-center space-x-2">
                         <h1 class="font-heading font-bold text-lg md:text-xl tracking-wide text-white flex items-center gap-2">
-                            RIG MASTER <span class="text-xs px-2 py-0.5 rounded bg-cyber-cyan/10 border border-cyber-cyan/40 text-cyber-cyan font-mono hidden sm:inline-block">PRO v2.4</span>
+                            RIG MASTER <span class="text-xs px-2 py-0.5 rounded bg-cyber-cyan/10 border border-cyber-cyan/40 text-cyber-cyan font-mono hidden sm:inline-block">GRID ENGINE 1:500</span>
                         </h1>
                     </div>
                     <p class="text-xs text-slate-400 font-mono flex items-center gap-2">
                         <span class="inline-block w-2 h-2 rounded-full bg-cyber-green pulse-live"></span>
                         <span class="hidden sm:inline">MT5 CONNECTED</span>
                         <span class="text-slate-600">|</span>
-                        <span>LATENCY: <span class="text-cyber-cyan">8.4 ms</span></span>
+                        <span>EQUIVALENT MARGIN MODE</span>
                     </p>
                 </div>
             </div>
 
-            <!-- Central Action Controls & AI Sentinel Badge -->
             <div class="flex items-center space-x-2 sm:space-x-4">
-                
-                <!-- Gemini Spark Badge -->
-                <div class="hidden md:flex items-center space-x-2 bg-slate-900/80 border border-cyber-amber/40 px-3 py-1.5 rounded-full shadow-[0_0_10px_rgba(255,183,3,0.15)]">
-                    <i class="fa-solid fa-bolt text-cyber-amber text-sm animate-bounce"></i>
-                    <span class="text-xs font-mono font-medium text-amber-200">GEMINI SPARK: ACTIVE</span>
+                <div class="flex items-center space-x-2 bg-slate-900/80 border border-cyber-amber/40 px-3 py-1.5 rounded-full">
+                    <i class="fa-solid fa-bolt text-cyber-amber text-sm"></i>
+                    <span class="text-xs font-mono font-medium text-amber-200">GEMINI SPARK AI CO-PILOT</span>
                 </div>
-
-                <!-- Emergency Panic Stop Button -->
-                <button onclick="openPanicModal()" class="bg-red-500/10 hover:bg-red-500/20 border border-red-500/50 hover:border-red-500 text-red-400 font-mono text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg flex items-center space-x-2 transition-all duration-200 shadow-[0_0_10px_rgba(239,68,68,0.2)]">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                    <span class="font-semibold hidden xs:inline">PANIC STOP</span>
-                </button>
-
-                <!-- Profile / System Switcher -->
-                <div class="relative">
-                    <button id="userMenuBtn" onclick="toggleUserMenu()" class="w-9 h-9 rounded-lg bg-cyber-card border border-cyber-border text-cyber-cyan flex items-center justify-center hover:bg-cyber-dark transition-colors">
-                        <i class="fa-solid fa-sliders"></i>
-                    </button>
-                    
-                    <!-- Dropdown Menu -->
-                    <div id="userDropdown" class="hidden absolute right-0 mt-2 w-56 bg-cyber-dark border border-cyber-border rounded-xl shadow-2xl p-2 z-50 font-mono text-xs">
-                        <div class="px-3 py-2 border-b border-slate-800 text-slate-400">SELECT FLEET ENGINE</div>
-                        <a href="#" class="block px-3 py-2 rounded-lg bg-cyber-cyan/10 text-cyber-cyan font-bold flex items-center justify-between">
-                            <span>RIG MASTER #01</span>
-                            <i class="fa-solid fa-check"></i>
-                        </a>
-                        <a href="#" class="block px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-300 transition-colors">RIG MASTER #02 (Hedge)</a>
-                        <div class="my-1 border-t border-slate-800"></div>
-                        <a href="#" onclick="toggleDarkMode()" class="block px-3 py-2 rounded-lg hover:bg-slate-800 text-slate-300 transition-colors flex items-center justify-between">
-                            <span>THEME MODE</span>
-                            <i class="fa-solid fa-moon text-cyber-cyan"></i>
-                        </a>
-                    </div>
-                </div>
-
             </div>
-
         </div>
     </header>
 
-    <!-- Main Container Layout -->
+    <!-- Main Content -->
     <main class="max-w-7xl mx-auto w-full px-4 lg:px-8 py-6 flex-grow space-y-6">
 
-        <!-- Responsive Navigation Tabs (Desktop & Tablet) -->
-        <div class="flex items-center justify-between border-b border-cyber-border/40 pb-3 overflow-x-auto no-scrollbar">
-            <nav class="flex space-x-2 md:space-x-4">
-                <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn px-4 py-2 rounded-lg font-heading font-semibold text-sm transition-all duration-200 bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/40 shadow-[0_0_10px_rgba(0,240,255,0.2)] flex items-center space-x-2">
-                    <i class="fa-solid fa-chart-pie"></i>
-                    <span>OVERVIEW</span>
-                </button>
-                <button onclick="switchTab('fleet')" id="tab-fleet" class="tab-btn px-4 py-2 rounded-lg font-heading font-semibold text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
-                    <i class="fa-solid fa-users-line"></i>
-                    <span>COPIER FLEET</span>
-                    <span class="bg-cyber-cyan/20 text-cyber-cyan text-xs font-mono px-2 py-0.5 rounded-full">3</span>
-                </button>
-                <button onclick="switchTab('sentinel')" id="tab-sentinel" class="tab-btn px-4 py-2 rounded-lg font-heading font-semibold text-sm text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all duration-200 flex items-center space-x-2">
-                    <i class="fa-solid fa-robot text-cyber-amber"></i>
-                    <span>AI SENTINEL</span>
-                </button>
-            </nav>
-
-            <div class="hidden lg:flex items-center space-x-4 text-xs font-mono text-slate-400">
-                <div>SERVER TIME: <span id="clock" class="text-white font-bold">15:50:23 UTC+7</span></div>
-                <div>SERVER: <span class="text-cyber-green">LONDON-VPS-01</span></div>
-            </div>
-        </div>
-
-        <!-- ================= TAB 1: OVERVIEW DASHBOARD ================= -->
-        <div id="content-overview" class="tab-content space-y-6">
-
-            <!-- KPI Metric Cards Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                
-                <!-- Master Equity Card -->
-                <div class="bg-cyber-card/80 backdrop-blur border border-cyber-border rounded-xl p-4 sm:p-5 relative overflow-hidden shadow-lg hover:border-cyber-cyan transition-all">
-                    <div class="absolute -right-4 -bottom-4 text-cyber-cyan/5 text-6xl font-heading font-bold select-none">USD</div>
-                    <div class="flex items-center justify-between text-slate-400 text-xs font-mono mb-2">
-                        <span>MASTER BALANCE / EQUITY</span>
-                        <i class="fa-solid fa-vault text-cyber-cyan"></i>
-                    </div>
-                    <div class="text-2xl sm:text-3xl font-heading font-bold text-white tracking-tight" id="val-master-equity">$10,500.00</div>
-                    <div class="flex items-center justify-between mt-3 text-xs font-mono">
-                        <span class="text-slate-400">INITIAL: $10,000.00</span>
-                        <span class="text-cyber-green font-semibold flex items-center gap-1">
-                            <i class="fa-solid fa-caret-up"></i> +$500.00 (+5.0%)
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Floating PnL Card -->
-                <div class="bg-cyber-card/80 backdrop-blur border border-cyber-border rounded-xl p-4 sm:p-5 relative overflow-hidden shadow-lg hover:border-cyber-cyan transition-all">
-                    <div class="flex items-center justify-between text-slate-400 text-xs font-mono mb-2">
-                        <span>FLOATING PnL (OPEN)</span>
-                        <i class="fa-solid fa-chart-line text-cyber-green"></i>
-                    </div>
-                    <div class="text-2xl sm:text-3xl font-heading font-bold text-cyber-green tracking-tight" id="val-floating-pnl">+$380.50</div>
-                    <div class="flex items-center justify-between mt-3 text-xs font-mono">
-                        <span class="text-slate-400">OPEN ORDERS: <strong class="text-white">6 LOTS</strong></span>
-                        <span class="text-cyber-cyan font-semibold">MAR. LEVEL: 850%</span>
-                    </div>
-                </div>
-
-                <!-- Total Fleet Copiers Equity -->
-                <div class="bg-cyber-card/80 backdrop-blur border border-cyber-border rounded-xl p-4 sm:p-5 relative overflow-hidden shadow-lg hover:border-cyber-cyan transition-all">
-                    <div class="flex items-center justify-between text-slate-400 text-xs font-mono mb-2">
-                        <span>TOTAL FLEET EQUITY</span>
-                        <i class="fa-solid fa-users text-cyber-cyan"></i>
-                    </div>
-                    <div class="text-2xl sm:text-3xl font-heading font-bold text-white tracking-tight" id="val-fleet-equity">$14,480.00</div>
-                    <div class="flex items-center justify-between mt-3 text-xs font-mono">
-                        <span class="text-slate-400">3 ACTIVE COPIERS</span>
-                        <span class="text-cyber-amber font-semibold">RISK: MEDIUM</span>
-                    </div>
-                </div>
-
-                <!-- Max Fleet Drawdown -->
-                <div class="bg-cyber-card/80 backdrop-blur border border-cyber-border rounded-xl p-4 sm:p-5 relative overflow-hidden shadow-lg hover:border-cyber-cyan transition-all">
-                    <div class="flex items-center justify-between text-slate-400 text-xs font-mono mb-2">
-                        <span>MAX FLEET DRAWDOWN</span>
-                        <i class="fa-solid fa-shield-halved text-cyber-amber"></i>
-                    </div>
-                    <div class="text-2xl sm:text-3xl font-heading font-bold text-cyber-amber tracking-tight" id="val-max-dd">2.10%</div>
-                    <div class="flex items-center justify-between mt-3 text-xs font-mono">
-                        <span class="text-slate-400">LIMIT THRESHOLD: 15%</span>
-                        <span class="text-cyber-green font-semibold">SAFE ZONE</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Main Charts & Live Platform Panel -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                
-                <!-- Real-Time Chart (Spans 2 cols on Desktop) -->
-                <div class="lg:col-span-2 bg-cyber-card/90 border border-cyber-border rounded-xl p-5 shadow-xl flex flex-col justify-between">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                        <div>
-                            <h3 class="font-heading font-semibold text-lg text-white flex items-center gap-2">
-                                <i class="fa-solid fa-chart-area text-cyber-cyan"></i>
-                                Real-Time Equity Curve vs Target
-                            </h3>
-                            <p class="text-xs text-slate-400 font-mono">Live WebSocket Data Stream from Rig Master Terminal</p>
-                        </div>
-                        <div class="flex items-center space-x-2 font-mono text-xs">
-                            <span class="px-2 py-1 rounded bg-slate-800 text-cyber-cyan border border-cyber-border">LIVE TICK</span>
-                            <span class="px-2 py-1 rounded bg-slate-800 text-slate-400">1H</span>
-                            <span class="px-2 py-1 rounded bg-slate-800 text-slate-400">1D</span>
-                        </div>
-                    </div>
-
-                    <!-- Canvas Chart Holder -->
-                    <div class="w-full h-64 sm:h-72 relative">
-                        <canvas id="equityChart"></canvas>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-slate-800 text-center text-xs font-mono">
-                        <div>
-                            <span class="text-slate-500 block">DAILY LOW</span>
-                            <span class="text-white font-bold">$10,320.00</span>
-                        </div>
-                        <div>
-                            <span class="text-slate-500 block">DAILY HIGH</span>
-                            <span class="text-cyber-cyan font-bold">$10,580.00</span>
-                        </div>
-                        <div>
-                            <span class="text-slate-500 block">WIN RATE (TODAY)</span>
-                            <span class="text-cyber-green font-bold">85.7%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Industrial Rig Status & AI Summary Box -->
-                <div class="space-y-6 flex flex-col justify-between">
-                    
-                    <!-- Industrial Platform Photo Banner Card -->
-                    <div class="bg-cyber-card border border-cyber-border rounded-xl overflow-hidden relative shadow-xl group">
-                        <div class="h-44 w-full relative overflow-hidden">
-                            <img src="image_80b923.jpg" alt="Rig Master Offshore Rig" class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-cyber-card via-cyber-card/40 to-transparent"></div>
-                            <span class="absolute top-3 left-3 bg-cyber-dark/90 text-cyber-cyan font-mono text-xs px-2.5 py-1 rounded border border-cyber-cyan/40">
-                                <i class="fa-solid fa-microchip mr-1"></i> RIG MASTER CORE
-                            </span>
-                        </div>
-                        <div class="p-4 relative -mt-6">
-                            <h4 class="font-heading font-bold text-base text-white">Offshore Trading Engine</h4>
-                            <p class="text-xs text-slate-400 mt-1 line-clamp-2">สถาปัตยกรรมมอนิเตอร์และบริหารความเสี่ยงระดับสถาบัน มั่นคง ปลอดภัย รองรับทุกสภาวะตลาด</p>
-                            <div class="mt-3 flex items-center justify-between text-xs font-mono pt-3 border-t border-slate-800">
-                                <span class="text-slate-400">ENGINE STATUS:</span>
-                                <span class="text-cyber-green font-bold flex items-center gap-1">
-                                    <i class="fa-solid fa-shield-check"></i> OPTIMAL
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Gemini Spark AI Sentinel Widget -->
-                    <div class="bg-cyber-card/90 border border-cyber-amber/40 rounded-xl p-4 shadow-xl relative overflow-hidden">
-                        <div class="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
-                            <div class="flex items-center space-x-2">
-                                <i class="fa-solid fa-brain text-cyber-amber"></i>
-                                <span class="font-heading font-semibold text-sm text-white">Gemini Spark Audit Log</span>
-                            </div>
-                            <span class="text-[10px] font-mono text-cyber-amber bg-cyber-amber/10 px-2 py-0.5 rounded border border-cyber-amber/30">REAL-TIME AI</span>
-                        </div>
-
-                        <div class="space-y-2 font-mono text-xs max-h-40 overflow-y-auto pr-1" id="ai-log-list">
-                            <div class="p-2 rounded bg-slate-900/80 border border-slate-800 text-slate-300">
-                                <span class="text-cyber-cyan">[15:48:10]</span> Normal Margin Ratio across all 3 copiers. No intervention needed.
-                            </div>
-                            <div class="p-2 rounded bg-slate-900/80 border border-amber-500/30 text-amber-200">
-                                <span class="text-cyber-amber">[15:35:02]</span> Warning: Copier #2 (1:500) Margin Cushion dropped to 190.2%. Monitoring closely.
-                            </div>
-                            <div class="p-2 rounded bg-slate-900/80 border border-slate-800 text-slate-300">
-                                <span class="text-cyber-cyan">[15:10:44]</span> Master Execution latency average: 4.2ms. Execution lag normal.
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Live Multi-Account Fleet Matrix Table -->
-            <div class="bg-cyber-card/90 border border-cyber-border rounded-xl p-5 shadow-xl">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                    <div>
-                        <h3 class="font-heading font-semibold text-lg text-white flex items-center gap-2">
-                            <i class="fa-solid fa-network-wired text-cyber-cyan"></i>
-                            Live Multi-Account Fleet Status Matrix
-                        </h3>
-                        <p class="text-xs text-slate-400 font-mono">การตรวจวัดพอร์ต Master และ Followers พร้อมการคำนวณ Margin Cushion Risk</p>
-                    </div>
-                    <button onclick="refreshMatrixData()" class="self-start sm:self-auto px-3 py-1.5 rounded-lg bg-cyber-dark border border-cyber-border text-cyber-cyan font-mono text-xs hover:bg-cyber-cyan/10 transition-colors flex items-center gap-1.5">
-                        <i class="fa-solid fa-rotate text-xs"></i>
-                        <span>REFRESH DATA</span>
-                    </button>
-                </div>
-
-                <!-- Responsive Table Wrapper (Horizontal Scroll on Mobile) -->
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left font-mono text-xs sm:text-sm">
-                        <thead>
-                            <tr class="bg-cyber-dark border-b border-cyber-border text-cyber-cyan uppercase text-xs font-semibold">
-                                <th class="p-3.5">Account Name</th>
-                                <th class="p-3.5">Role</th>
-                                <th class="p-3.5">Leverage</th>
-                                <th class="p-3.5">Equity / Balance</th>
-                                <th class="p-3.5">Floating PnL</th>
-                                <th class="p-3.5">Drawdown</th>
-                                <th class="p-3.5">Margin Level</th>
-                                <th class="p-3.5 text-center">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-800/80" id="matrix-tbody">
-                            <!-- Master Row -->
-                            <tr class="hover:bg-slate-900/50 transition-colors bg-cyber-cyan/5">
-                                <td class="p-3.5 font-bold text-white flex items-center gap-2">
-                                    <i class="fa-solid fa-crown text-cyber-amber"></i>
-                                    Rig Master Main
-                                </td>
-                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-cyber-cyan/20 border border-cyber-cyan/40 text-cyber-cyan text-xs font-bold">MASTER</span></td>
-                                <td class="p-3.5 text-slate-300">1:100</td>
-                                <td class="p-3.5 text-white font-semibold">$10,500 / $10,000</td>
-                                <td class="p-3.5 text-cyber-green font-bold">+$500.00</td>
-                                <td class="p-3.5 text-slate-300">2.10%</td>
-                                <td class="p-3.5 text-cyber-cyan font-bold">850.5%</td>
-                                <td class="p-3.5 text-center"><span class="px-2.5 py-1 rounded-full bg-cyber-green/10 text-cyber-green border border-cyber-green/30 text-xs font-bold">HEALTHY</span></td>
-                            </tr>
-                            <!-- Copier 1 Row -->
-                            <tr class="hover:bg-slate-900/50 transition-colors">
-                                <td class="p-3.5 text-slate-200">Copier Account #1</td>
-                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-400 text-xs">FOLLOWER</span></td>
-                                <td class="p-3.5 text-slate-300">1:200</td>
-                                <td class="p-3.5 text-white">$2,150 / $2,000</td>
-                                <td class="p-3.5 text-cyber-green">+$150.00</td>
-                                <td class="p-3.5 text-slate-300">4.20%</td>
-                                <td class="p-3.5 text-slate-300">420.0%</td>
-                                <td class="p-3.5 text-center"><span class="px-2.5 py-1 rounded-full bg-cyber-green/10 text-cyber-green border border-cyber-green/30 text-xs">HEALTHY</span></td>
-                            </tr>
-                            <!-- Copier 2 Row (Warning) -->
-                            <tr class="hover:bg-slate-900/50 transition-colors bg-amber-500/5">
-                                <td class="p-3.5 text-slate-200 flex items-center gap-2">
-                                    Copier Account #2
-                                    <i class="fa-solid fa-triangle-exclamation text-cyber-amber text-xs"></i>
-                                </td>
-                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-400 text-xs">FOLLOWER</span></td>
-                                <td class="p-3.5 text-cyber-amber font-bold">1:500</td>
-                                <td class="p-3.5 text-white">$580 / $500</td>
-                                <td class="p-3.5 text-cyber-green">+$80.00</td>
-                                <td class="p-3.5 text-cyber-amber">8.50%</td>
-                                <td class="p-3.5 text-cyber-amber font-bold">190.2%</td>
-                                <td class="p-3.5 text-center"><span class="px-2.5 py-1 rounded-full bg-cyber-amber/10 text-cyber-amber border border-cyber-amber/30 text-xs font-bold">LOW MARGIN</span></td>
-                            </tr>
-                            <!-- Copier 3 Row -->
-                            <tr class="hover:bg-slate-900/50 transition-colors">
-                                <td class="p-3.5 text-slate-200">Copier Account #3</td>
-                                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-400 text-xs">FOLLOWER</span></td>
-                                <td class="p-3.5 text-slate-300">1:1000</td>
-                                <td class="p-3.5 text-white">$1,250 / $1,200</td>
-                                <td class="p-3.5 text-cyber-green">+$50.00</td>
-                                <td class="p-3.5 text-slate-300">3.10%</td>
-                                <td class="p-3.5 text-slate-300">910.0%</td>
-                                <td class="p-3.5 text-center"><span class="px-2.5 py-1 rounded-full bg-cyber-green/10 text-cyber-green border border-cyber-green/30 text-xs">HEALTHY</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <!-- Overview KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-cyber-card/80 border border-cyber-border rounded-xl p-5 relative overflow-hidden">
+                <div class="text-slate-400 text-xs font-mono mb-1">MASTER EQUITY / BALANCE</div>
+                <div class="text-2xl font-bold text-white font-mono" id="val-master-equity">$10,500.00</div>
+                <div class="text-xs text-slate-400 font-mono mt-1">Balance: <span class="text-slate-200" id="val-master-balance">$10,000.00</span></div>
+                <div class="text-xs text-cyber-green font-mono mt-2 flex items-center gap-1">
+                    <i class="fa-solid fa-arrow-trend-up"></i> +5.0% Account Growth
                 </div>
             </div>
 
-        </div>
+            <div class="bg-cyber-card/80 border border-cyber-border rounded-xl p-5 relative overflow-hidden">
+                <div class="text-slate-400 text-xs font-mono mb-1">FLOATING PnL (GRID POSITIONS)</div>
+                <div class="text-2xl font-bold text-cyber-green font-mono" id="val-floating-pnl">+$380.50</div>
+                <div class="text-xs text-slate-400 font-mono mt-1">Total Active Grid Positions</div>
+                <div class="text-xs text-cyber-cyan font-mono mt-2 flex items-center gap-1">
+                    <i class="fa-solid fa-layer-group"></i> 8 Open Orders
+                </div>
+            </div>
 
-        <!-- ================= TAB 2: FLEET MANAGEMENT ================= -->
-        <div id="content-fleet" class="tab-content hidden space-y-6">
-            <div class="bg-cyber-card/90 border border-cyber-border rounded-xl p-6 shadow-xl">
-                <h3 class="font-heading font-bold text-xl text-white mb-2">Fleet Leverage & Risk Normalization Control</h3>
-                <p class="text-sm text-slate-400 mb-6">ตั้งค่าเปรียบเทียบ Risk Ratio และ Margin Cushion สำหรับพอร์ต Copier ที่ใช้ Leverage แตกต่างจาก Master</p>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Config Card 1 -->
-                    <div class="bg-slate-900/90 border border-cyber-border rounded-xl p-5 space-y-4">
-                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                            <span class="font-bold text-white">Copier #1 (1:200)</span>
-                            <span class="text-xs bg-cyber-green/20 text-cyber-green px-2 py-0.5 rounded">SYNCING</span>
-                        </div>
-                        <div class="space-y-2 text-xs font-mono">
-                            <div class="flex justify-between text-slate-400">
-                                <span>Risk Multiplier:</span>
-                                <span class="text-cyber-cyan font-bold">1.0x (Auto)</span>
-                            </div>
-                            <div class="flex justify-between text-slate-400">
-                                <span>Max Allowed DD:</span>
-                                <span class="text-white">12.0%</span>
-                            </div>
-                            <div class="flex justify-between text-slate-400">
-                                <span>Stop-Out Protection:</span>
-                                <span class="text-cyber-green">ENABLED</span>
-                            </div>
-                        </div>
-                        <button class="w-full py-2 rounded-lg bg-slate-800 hover:bg-cyber-cyan/20 border border-cyber-border text-cyber-cyan font-mono text-xs transition-colors">EDIT PARAMETERS</button>
-                    </div>
+            <div class="bg-cyber-card/80 border border-cyber-border rounded-xl p-5 relative overflow-hidden">
+                <div class="text-slate-400 text-xs font-mono mb-1">FLEET TOTAL EQUITY</div>
+                <div class="text-2xl font-bold text-white font-mono" id="val-fleet-equity">$13,230.00</div>
+                <div class="text-xs text-slate-400 font-mono mt-1">Master + 2 Copiers Combined</div>
+                <div class="text-xs text-slate-300 font-mono mt-2 flex items-center gap-1">
+                    <i class="fa-solid fa-server"></i> 3/3 Accounts Active
+                </div>
+            </div>
 
-                    <!-- Config Card 2 -->
-                    <div class="bg-slate-900/90 border border-cyber-amber/40 rounded-xl p-5 space-y-4 shadow-[0_0_15px_rgba(255,183,3,0.1)]">
-                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                            <span class="font-bold text-white">Copier #2 (1:500)</span>
-                            <span class="text-xs bg-cyber-amber/20 text-cyber-amber px-2 py-0.5 rounded">ATTENTION</span>
-                        </div>
-                        <div class="space-y-2 text-xs font-mono">
-                            <div class="flex justify-between text-slate-400">
-                                <span>Risk Multiplier:</span>
-                                <span class="text-cyber-amber font-bold">0.5x (Reduced)</span>
-                            </div>
-                            <div class="flex justify-between text-slate-400">
-                                <span>Max Allowed DD:</span>
-                                <span class="text-white">8.0%</span>
-                            </div>
-                            <div class="flex justify-between text-slate-400">
-                                <span>Margin Alert Level:</span>
-                                <span class="text-cyber-amber">200.0%</span>
-                            </div>
-                        </div>
-                        <button class="w-full py-2 rounded-lg bg-cyber-amber/20 hover:bg-cyber-amber/30 border border-cyber-amber/50 text-cyber-amber font-mono text-xs transition-colors">ADJUST MARGIN CUSHION</button>
-                    </div>
-
-                    <!-- Config Card 3 -->
-                    <div class="bg-slate-900/90 border border-cyber-border rounded-xl p-5 space-y-4">
-                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                            <span class="font-bold text-white">Copier #3 (1:1000)</span>
-                            <span class="text-xs bg-cyber-green/20 text-cyber-green px-2 py-0.5 rounded">SYNCING</span>
-                        </div>
-                        <div class="space-y-2 text-xs font-mono">
-                            <div class="flex justify-between text-slate-400">
-                                <span>Risk Multiplier:</span>
-                                <span class="text-cyber-cyan font-bold">0.25x (Safe)</span>
-                            </div>
-                            <div class="flex justify-between text-slate-400">
-                                <span>Max Allowed DD:</span>
-                                <span class="text-white">5.0%</span>
-                            </div>
-                            <div class="flex justify-between text-slate-400">
-                                <span>Stop-Out Protection:</span>
-                                <span class="text-cyber-green">ENABLED</span>
-                            </div>
-                        </div>
-                        <button class="w-full py-2 rounded-lg bg-slate-800 hover:bg-cyber-cyan/20 border border-cyber-border text-cyber-cyan font-mono text-xs transition-colors">EDIT PARAMETERS</button>
-                    </div>
+            <div class="bg-cyber-card/80 border border-cyber-border rounded-xl p-5 relative overflow-hidden">
+                <div class="text-slate-400 text-xs font-mono mb-1">EQUIVALENT MARGIN LEVEL</div>
+                <div class="text-2xl font-bold text-cyber-cyan font-mono" id="val-margin-level">2,450%</div>
+                <div class="text-xs text-slate-400 font-mono mt-1">Normalized Leverage: 1:500</div>
+                <div class="text-xs text-cyber-green font-mono mt-2 flex items-center gap-1">
+                    <i class="fa-solid fa-shield-halved"></i> Safety Cushion Optimal
                 </div>
             </div>
         </div>
 
-        <!-- ================= TAB 3: AI SENTINEL (GEMINI SPARK) ================= -->
-        <div id="content-sentinel" class="tab-content hidden space-y-6">
-            <div class="bg-cyber-card/90 border border-cyber-amber/40 rounded-xl p-6 shadow-2xl">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-10 h-10 rounded-lg bg-cyber-amber/10 border border-cyber-amber/40 flex items-center justify-center text-cyber-amber text-xl">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-heading font-bold text-xl text-white">Gemini Spark Sentinel Assistant</h3>
-                        <p class="text-xs text-slate-400 font-mono">ระบบ AI อัตโนมัติคอยเฝ้าระวังพอร์ตและอ่านข้อความแจ้งเตือนตลอด 24 ชั่วโมง</p>
-                    </div>
+        <!-- Real-Time Chart Section -->
+        <div class="bg-cyber-card/90 border border-cyber-border rounded-xl p-5 relative">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                <div>
+                    <h3 class="font-heading font-semibold text-lg text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-cyber-cyan"></i>
+                        Real-Time Equity & Floating PnL Performance
+                    </h3>
+                    <p class="text-xs text-slate-400 font-mono">Live tick updates synced with MT5 Grid Engine</p>
                 </div>
-
-                <!-- Simulated Interactive Prompt Box -->
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 font-mono text-xs space-y-3">
-                    <div class="flex items-start space-x-2 text-cyber-amber">
-                        <i class="fa-solid fa-chevron-right mt-0.5"></i>
-                        <span>System Prompt configured for Rig Master Monitoring:</span>
-                    </div>
-                    <div class="bg-cyber-dark p-3 rounded text-slate-300 border border-slate-800 leading-relaxed">
-                        "คอยตรวจสอบอีเมลใหม่ที่มี Label <strong class="text-cyber-cyan">RigMaster-Monitor</strong> หากพบอีเมลที่มี Severe Status หรือ Drawdown เกิน 10% ให้สรุปค่า Equity และ Floating PnL แจ้งเตือนทันที"
-                    </div>
-
-                    <div class="pt-3 border-t border-slate-800">
-                        <label class="block text-slate-400 mb-2">ทดสอบส่งคำสั่งให้ Gemini Spark วิเคราะห์พอร์ตปัจจุบัน:</label>
-                        <div class="flex space-x-2">
-                            <input type="text" id="ai-input-prompt" placeholder="เช่น สรุปความเสี่ยงของ Copier Account #2 ให้หน่อย..." class="flex-grow bg-cyber-dark border border-cyber-border rounded-lg px-3 py-2 text-white focus:outline-none focus:border-cyber-cyan">
-                            <button onclick="askGeminiSpark()" class="px-4 py-2 bg-cyber-amber text-slate-950 font-bold rounded-lg hover:bg-amber-400 transition-colors flex items-center gap-1.5">
-                                <i class="fa-solid fa-paper-plane"></i>
-                                <span>ASK AI</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- AI Response Area -->
-                    <div id="ai-response-box" class="hidden mt-4 p-3 bg-cyber-dark/90 border border-cyber-amber/30 rounded-lg text-amber-200 text-xs leading-relaxed animate-fade-in">
-                        <!-- Simulated AI Response -->
-                    </div>
+                <div class="flex items-center space-x-2 font-mono text-xs">
+                    <span class="px-2.5 py-1 rounded bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan">M1 Live Tick</span>
+                    <span class="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-slate-400">1:500 Normalized</span>
                 </div>
+            </div>
+            
+            <!-- Chart Canvas -->
+            <div class="w-full h-[280px] sm:h-[320px]">
+                <canvas id="realtimeEquityChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Live Multi-Account Matrix Table -->
+        <div class="bg-cyber-card/90 border border-cyber-border rounded-xl p-5">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-heading font-semibold text-lg text-white flex items-center gap-2">
+                    <i class="fa-solid fa-network-wired text-cyber-cyan"></i>
+                    Live Multi-Account Matrix (Equivalent Margin Mode)
+                </h3>
+                <span class="text-xs font-mono text-slate-400 hidden sm:inline-block">Auto Sync: 3s</span>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left font-mono text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-cyber-dark text-cyber-cyan border-b border-cyber-border">
+                            <th class="p-3">Account Name</th>
+                            <th class="p-3">Role</th>
+                            <th class="p-3">Leverage</th>
+                            <th class="p-3">Equity / Balance</th>
+                            <th class="p-3">Floating PnL</th>
+                            <th class="p-3">Equivalent Margin</th>
+                            <th class="p-3 text-center">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800">
+                        <!-- Master Row -->
+                        <tr class="bg-cyber-cyan/5">
+                            <td class="p-3 font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-crown text-cyber-amber text-xs"></i>
+                                Rig Master Main
+                            </td>
+                            <td class="p-3"><span class="text-cyber-cyan font-bold">MASTER</span></td>
+                            <td class="p-3 text-white">1:500</td>
+                            <td class="p-3 text-white">$10,500 / $10,000</td>
+                            <td class="p-3 text-cyber-green font-bold">+$500.00</td>
+                            <td class="p-3 text-cyber-cyan">100% (Base)</td>
+                            <td class="p-3 text-center"><span class="bg-cyber-green/20 text-cyber-green px-2.5 py-1 rounded text-xs">HEALTHY</span></td>
+                        </tr>
+                        <!-- Copier 1 -->
+                        <tr>
+                            <td class="p-3 text-slate-200">Copier Account #1</td>
+                            <td class="p-3 text-slate-400">FOLLOWER</td>
+                            <td class="p-3 text-white">1:500</td>
+                            <td class="p-3 text-white">$2,150 / $2,000</td>
+                            <td class="p-3 text-cyber-green font-bold">+$150.00</td>
+                            <td class="p-3 text-slate-300">100% Synced</td>
+                            <td class="p-3 text-center"><span class="bg-cyber-green/20 text-cyber-green px-2.5 py-1 rounded text-xs">HEALTHY</span></td>
+                        </tr>
+                        <!-- Copier 2 -->
+                        <tr>
+                            <td class="p-3 text-slate-200">Copier Account #2</td>
+                            <td class="p-3 text-slate-400">FOLLOWER</td>
+                            <td class="p-3 text-white">1:500</td>
+                            <td class="p-3 text-white">$580 / $500</td>
+                            <td class="p-3 text-cyber-green font-bold">+$80.00</td>
+                            <td class="p-3 text-slate-300">100% Synced</td>
+                            <td class="p-3 text-center"><span class="bg-cyber-green/20 text-cyber-green px-2.5 py-1 rounded text-xs">HEALTHY</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
     </main>
 
-    <!-- Mobile Navigation Bottom Bar (Shown only on small screens) -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-cyber-dark/95 backdrop-blur-md border-t border-cyber-border z-40 px-4 py-2 flex justify-around items-center font-mono text-xs">
-        <button onclick="switchTab('overview')" id="mob-tab-overview" class="flex flex-col items-center space-y-1 text-cyber-cyan">
-            <i class="fa-solid fa-chart-pie text-base"></i>
-            <span class="text-[10px]">OVERVIEW</span>
-        </button>
-        <button onclick="switchTab('fleet')" id="mob-tab-fleet" class="flex flex-col items-center space-y-1 text-slate-400">
-            <i class="fa-solid fa-users-line text-base"></i>
-            <span class="text-[10px]">FLEET</span>
-        </button>
-        <button onclick="switchTab('sentinel')" id="mob-tab-sentinel" class="flex flex-col items-center space-y-1 text-slate-400">
-            <i class="fa-solid fa-robot text-base text-cyber-amber"></i>
-            <span class="text-[10px]">AI SPARK</span>
-        </button>
-    </div>
-
-    <!-- Emergency Panic Modal -->
-    <div id="panicModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-cyber-dark border border-red-500/50 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
-            <div class="flex items-center space-x-3 text-red-500">
-                <i class="fa-solid fa-triangle-exclamation text-3xl"></i>
-                <h3 class="font-heading font-bold text-xl text-white">EMERGENCY PANIC STOP</h3>
-            </div>
-            <p class="text-xs text-slate-300 font-mono leading-relaxed">
-                คุณกำลังจะส่งคำสั่งปิดออเดอร์ทั้งหมด (Close All Open Positions) ทั้งในพอร์ต Master และ Copier Accounts ทั้งหมดในระบบทันที!
-            </p>
-            <div class="bg-red-950/40 border border-red-500/30 p-3 rounded-lg text-xs font-mono text-red-300">
-                คำเตือน: การดำเนินการนี้ไม่สามารถยกเลิกได้ และจะหยุดระบบ Copier EA ชั่วคราว
-            </div>
-            <div class="flex space-x-3 pt-2">
-                <button onclick="closePanicModal()" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs font-semibold">CANCEL</button>
-                <button onclick="executePanicStop()" class="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-mono text-xs font-bold shadow-[0_0_15px_rgba(239,68,68,0.5)]">CONFIRM CLOSE ALL</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Page Footer -->
-    <footer class="border-t border-cyber-border/30 bg-cyber-black py-4 px-4 lg:px-8 text-center text-xs font-mono text-slate-500 mb-12 md:mb-0">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-            <div>© 2026 RIG MASTER TRADING ENGINE | ALL RIGHTS RESERVED</div>
-            <div class="flex items-center space-x-4">
-                <span class="text-cyber-cyan"><i class="fa-solid fa-server"></i> ULTRA-LOW LATENCY</span>
-                <span class="text-cyber-amber"><i class="fa-solid fa-bolt"></i> GEMINI SPARK READY</span>
-            </div>
-        </div>
+    <!-- Footer -->
+    <footer class="border-t border-cyber-border/30 bg-cyber-black py-4 px-4 text-center text-xs font-mono text-slate-500">
+        © 2026 RIG MASTER GRID TRADING ENGINE | EQUIVALENT MARGIN MONITORED
     </footer>
 
-    <!-- JavaScript Application Logic -->
+    <!-- Chart Setup Script -->
     <script>
-        // Chart.js Setup
-        let equityChart;
-
-        function initChart() {
-            const ctx = document.getElementById('equityChart').getContext('2d');
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('realtimeEquityChart').getContext('2d');
             
-            // Gradient Fill for Cyber Cyan
-            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-            gradient.addColorStop(0, 'rgba(0, 240, 255, 0.4)');
-            gradient.addColorStop(1, 'rgba(0, 240, 255, 0.0)');
+            // Gradient fill for Equity Line
+            const equityGradient = ctx.createLinearGradient(0, 0, 0, 300);
+            equityGradient.addColorStop(0, 'rgba(0, 240, 255, 0.4)');
+            equityGradient.addColorStop(1, 'rgba(0, 240, 255, 0.0)');
 
-            equityChart = new Chart(ctx, {
+            // Dummy Initial Data Points (Will be replaced by Firebase API)
+            const labels = ['10:00', '10:05', '10:10', '10:15', '10:20', '10:25', '10:30', '10:35', '10:40', '10:45'];
+            const equityData = [10000, 10050, 10120, 10080, 10200, 10310, 10280, 10400, 10450, 10500];
+            const pnlData = [0, 50, 120, 80, 200, 310, 280, 400, 450, 500];
+
+            const chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '15:50'],
-                    datasets: [{
-                        label: 'Master Equity ($)',
-                        data: [10000, 10120, 10080, 10250, 10380, 10420, 10500],
-                        borderColor: '#00f0ff',
-                        borderWidth: 3,
-                        backgroundColor: gradient,
-                        fill: true,
-                        tension: 0.35,
-                        pointBackgroundColor: '#030712',
-                        pointBorderColor: '#00f0ff',
-                        pointBorderWidth: 2,
-                        pointRadius: 4,
-                        pointHoverRadius: 6
-                    }]
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Master Equity ($)',
+                            data: equityData,
+                            borderColor: '#00f0ff',
+                            borderWidth: 2,
+                            backgroundColor: equityGradient,
+                            fill: true,
+                            tension: 0.3,
+                            pointRadius: 3,
+                            pointBackgroundColor: '#00f0ff'
+                        },
+                        {
+                            label: 'Floating PnL ($)',
+                            data: pnlData,
+                            borderColor: '#22c55e',
+                            borderWidth: 1.5,
+                            borderDash: [4, 4],
+                            fill: false,
+                            tension: 0.3,
+                            pointRadius: 0
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: false },
+                        legend: {
+                            labels: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 11 } }
+                        },
                         tooltip: {
+                            mode: 'index',
+                            intersect: false,
                             backgroundColor: '#070c18',
-                            borderColor: 'rgba(0, 240, 255, 0.4)',
-                            borderWidth: 1,
-                            titleFont: { family: 'JetBrains Mono' },
-                            bodyFont: { family: 'JetBrains Mono' }
+                            titleColor: '#00f0ff',
+                            bodyColor: '#f3f4f6',
+                            borderColor: 'rgba(0,240,255,0.3)',
+                            borderWidth: 1
                         }
                     },
                     scales: {
@@ -658,107 +288,20 @@
                     }
                 }
             });
-        }
 
-        // Tab Switching Logic
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('content-' + tabId).classList.remove('hidden');
+            // Real-time Update Function (Connected via Firebase)
+            window.updateDashboardChart = function(timeLabel, newEquity, newPnL) {
+                chart.data.labels.push(timeLabel);
+                chart.data.datasets[0].data.push(newEquity);
+                chart.data.datasets[1].data.push(newPnL);
 
-            // Style Reset
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-cyber-cyan/10', 'text-cyber-cyan', 'border', 'border-cyber-cyan/40', 'shadow-[0_0_10px_rgba(0,240,255,0.2)]');
-                btn.classList.add('text-slate-400');
-            });
-
-            // Activate Tab Style
-            const activeBtn = document.getElementById('tab-' + tabId);
-            if(activeBtn) {
-                activeBtn.classList.add('bg-cyber-cyan/10', 'text-cyber-cyan', 'border', 'border-cyber-cyan/40', 'shadow-[0_0_10px_rgba(0,240,255,0.2)]');
-                activeBtn.classList.remove('text-slate-400');
-            }
-
-            // Mobile nav styling update
-            document.querySelectorAll('.md\\:hidden button').forEach(b => b.classList.replace('text-cyber-cyan', 'text-slate-400'));
-            const mobActive = document.getElementById('mob-tab-' + tabId);
-            if(mobActive) mobActive.classList.replace('text-slate-400', 'text-cyber-cyan');
-        }
-
-        // Modal Controls
-        function openPanicModal() {
-            document.getElementById('panicModal').classList.remove('hidden');
-        }
-        function closePanicModal() {
-            document.getElementById('panicModal').classList.add('hidden');
-        }
-        function executePanicStop() {
-            alert('EMERGENCY COMMAND SENT: All positions across Master & Fleet Copiers have been closed.');
-            closePanicModal();
-        }
-
-        // Dropdown Toggle
-        function toggleUserMenu() {
-            document.getElementById('userDropdown').classList.toggle('hidden');
-        }
-
-        // Real-Time Price Simulation Engine
-        function startRealTimeTicker() {
-            setInterval(() => {
-                // Random float fluctuation
-                const change = (Math.random() - 0.45) * 12;
-                const currentEquity = 10500 + change;
-                
-                document.getElementById('val-master-equity').innerText = '$' + currentEquity.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                
-                const pnl = 380.50 + change;
-                const pnlEl = document.getElementById('val-floating-pnl');
-                pnlEl.innerText = (pnl >= 0 ? '+' : '') + '$' + pnl.toFixed(2);
-                pnlEl.className = 'text-2xl sm:text-3xl font-heading font-bold tracking-tight ' + (pnl >= 0 ? 'text-cyber-green' : 'text-cyber-red');
-
-                // Update Chart
-                if(equityChart && equityChart.data.datasets[0]) {
-                    const lastIdx = equityChart.data.datasets[0].data.length - 1;
-                    equityChart.data.datasets[0].data[lastIdx] = currentEquity;
-                    equityChart.update('none');
+                if (chart.data.labels.length > 20) {
+                    chart.data.labels.shift();
+                    chart.data.datasets[0].data.shift();
+                    chart.data.datasets[1].data.shift();
                 }
-            }, 3000);
-        }
-
-        // Simulated AI Spark Interaction
-        function askGeminiSpark() {
-            const input = document.getElementById('ai-input-prompt');
-            const box = document.getElementById('ai-response-box');
-            if(!input.value.trim()) return;
-
-            box.classList.remove('hidden');
-            box.innerHTML = `<div class="flex items-center space-x-2"><i class="fa-solid fa-spinner animate-spin"></i><span>Gemini Spark Analyzing Fleet Matrix...</span></div>`;
-
-            setTimeout(() => {
-                box.innerHTML = `<strong class="text-white">Gemini Spark Analysis:</strong><br>
-                สำหรับพอร์ต <span class="text-cyber-amber">Copier Account #2 (Leverage 1:500)</span> ปัจจุบันมี Margin Level อยู่ที่ 190.2% ซึ่งต่ำกว่า Safe Threshold (250%) แนะนำให้ทำการลด Lot Multiplier จาก 0.5x ลงเหลือ 0.3x หรือเติม Margin Cushion เพิ่มเติมเพื่อป้องกันการเกิด Stop Out ระหว่างตลาดผันผวนครับ`;
-                input.value = '';
-            }, 1200);
-        }
-
-        function refreshMatrixData() {
-            const logList = document.getElementById('ai-log-list');
-            const newLog = document.createElement('div');
-            newLog.className = 'p-2 rounded bg-slate-900/80 border border-cyber-cyan/30 text-cyber-cyan animate-fade-in';
-            const now = new Date().toTimeString().split(' ')[0];
-            newLog.innerHTML = `<span class="text-white">[${now}]</span> Manual Matrix Refresh Executed. All 4 accounts synced successfully.`;
-            logList.prepend(newLog);
-        }
-
-        // Initialize App on Load
-        window.addEventListener('DOMContentLoaded', () => {
-            initChart();
-            startRealTimeTicker();
-
-            // Realtime clock
-            setInterval(() => {
-                const d = new Date();
-                document.getElementById('clock').innerText = d.toTimeString().split(' ')[0] + ' UTC+7';
-            }, 1000);
+                chart.update();
+            };
         });
     </script>
 </body>
