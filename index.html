@@ -86,7 +86,7 @@
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto w-full px-4 lg:px-8 py-6 flex-grow space-y-6">
 
-        <!-- Overview KPI Cards (ลดเหลือ 3 Card เฉพาะพอร์ต Master) -->
+        <!-- Overview KPI Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="bg-cyber-card/80 border border-cyber-border rounded-xl p-5 relative overflow-hidden">
                 <div class="text-slate-400 text-xs font-mono mb-1">EQUITY / BALANCE</div>
@@ -141,13 +141,10 @@
                         <i class="fa-solid fa-chart-line text-cyber-cyan"></i>
                         Equity & Floating PnL Performance
                     </h3>
-                    <p class="text-xs text-slate-400 font-mono">Dual-Axis Chart | Synced with MT5</p>
+                    <p class="text-xs text-slate-400 font-mono">Dual-Axis Chart | Live Tick Synced with MT5</p>
                 </div>
-                <!-- Time Frame Controls -->
-                <div class="flex items-center space-x-1 font-mono text-xs bg-slate-900/80 p-1 rounded-lg border border-slate-700">
-                    <button onclick="changeChartInterval('live', 3000)" id="btn-tf-live" class="tf-btn px-3 py-1.5 rounded bg-cyber-cyan/20 border border-cyber-cyan/50 text-cyber-cyan transition-colors">Live (3s)</button>
-                    <button onclick="changeChartInterval('m1', 60000)" id="btn-tf-m1" class="tf-btn px-3 py-1.5 rounded bg-transparent text-slate-400 hover:text-white transition-colors">1 Min</button>
-                    <button onclick="changeChartInterval('m5', 300000)" id="btn-tf-m5" class="tf-btn px-3 py-1.5 rounded bg-transparent text-slate-400 hover:text-white transition-colors">5 Min</button>
+                <div class="flex items-center space-x-2 font-mono text-xs">
+                    <span class="px-2.5 py-1 rounded bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan">Live (3s)</span>
                 </div>
             </div>
             
@@ -167,21 +164,6 @@
     <!-- Script Configurations -->
     <script>
         let chartInstance = null;
-        let chartUpdateIntervalMs = 3000; // Default to Live (3s)
-        let lastChartUpdateTime = 0;
-
-        // ฟังก์ชันเปลี่ยน Time Frame ของกราฟ
-        window.changeChartInterval = function(tfId, ms) {
-            chartUpdateIntervalMs = ms;
-            
-            // ล้างสีปุ่มเดิม
-            document.querySelectorAll('.tf-btn').forEach(btn => {
-                btn.className = 'tf-btn px-3 py-1.5 rounded bg-transparent text-slate-400 hover:text-white transition-colors';
-            });
-            // ไฮไลต์ปุ่มที่ถูกเลือก
-            const activeBtn = document.getElementById('btn-tf-' + tfId);
-            activeBtn.className = 'tf-btn px-3 py-1.5 rounded bg-cyber-cyan/20 border border-cyber-cyan/50 text-cyber-cyan transition-colors';
-        };
 
         document.addEventListener('DOMContentLoaded', function () {
             const ctx = document.getElementById('realtimeEquityChart').getContext('2d');
@@ -207,10 +189,10 @@
                             borderWidth: 2,
                             backgroundColor: equityGradient,
                             fill: true,
-                            tension: 0.4, // ทำให้กราฟดูสมูทขึ้น
+                            tension: 0.4, 
                             pointRadius: 2,
                             pointBackgroundColor: '#00f0ff',
-                            yAxisID: 'y' // ผูกกับแกน Y ซ้าย
+                            yAxisID: 'y' 
                         },
                         {
                             label: 'Floating PnL ($)',
@@ -221,7 +203,7 @@
                             fill: false,
                             tension: 0.4,
                             pointRadius: 2,
-                            yAxisID: 'y1' // ผูกกับแกน Y ขวา
+                            yAxisID: 'y1' 
                         }
                     ]
                 },
@@ -241,7 +223,6 @@
                             grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
                             ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 10 }, maxTicksLimit: 15 } 
                         },
-                        // แกน Y ฝั่งซ้าย (สำหรับ Equity)
                         y: { 
                             type: 'linear',
                             display: true,
@@ -249,15 +230,14 @@
                             title: { display: true, text: 'Equity ($)', color: '#00f0ff', font: { family: 'JetBrains Mono', size: 10 } },
                             grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
                             ticks: { color: '#00f0ff', font: { family: 'JetBrains Mono', size: 10 } },
-                            grace: '5%' // เผื่อขอบบนล่างไม่ให้กราฟติดขอบ
+                            grace: '5%' 
                         },
-                        // แกน Y ฝั่งขวา (สำหรับ Floating PnL)
                         y1: { 
                             type: 'linear',
                             display: true,
                             position: 'right',
                             title: { display: true, text: 'Floating PnL ($)', color: '#22c55e', font: { family: 'JetBrains Mono', size: 10 } },
-                            grid: { drawOnChartArea: false }, // ซ่อนเส้น Grid ไม่ให้ทับซ้อนกัน
+                            grid: { drawOnChartArea: false }, 
                             ticks: { color: '#22c55e', font: { family: 'JetBrains Mono', size: 10 } },
                             grace: '5%'
                         }
@@ -289,7 +269,7 @@
                 if (data && data.master) {
                     const master = data.master;
 
-                    // 1. อัปเดตตัวเลขบน Card ด้านบน (อัปเดตตลอดเวลาทุก 3 วินาที)
+                    // อัปเดต Card
                     document.getElementById('val-master-equity').innerText = '$' + master.equity.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                     document.getElementById('val-master-balance').innerText = '$' + master.balance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                     
@@ -303,16 +283,12 @@
                         document.getElementById('val-open-orders').innerHTML = `<i class="fa-solid fa-layer-group"></i> ${master.open_orders} Open Orders`;
                     }
 
-                    // 2. อัปเดตกราฟ (เช็ก Time Frame ที่เลือกก่อนวาดจุดใหม่)
-                    const nowMs = Date.now();
-                    if (nowMs - lastChartUpdateTime >= chartUpdateIntervalMs) {
-                        const now = new Date();
-                        const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
-                        
-                        if (window.updateDashboardChart) {
-                            window.updateDashboardChart(timeStr, master.equity, master.pnl);
-                            lastChartUpdateTime = nowMs; // บันทึกเวลาล่าสุดที่วาดกราฟ
-                        }
+                    // อัปเดตกราฟ (ทุกครั้งที่ดึงข้อมูลใหม่)
+                    const now = new Date();
+                    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
+                    
+                    if (window.updateDashboardChart) {
+                        window.updateDashboardChart(timeStr, master.equity, master.pnl);
                     }
                 }
             } catch (error) {
@@ -320,7 +296,7 @@
             }
         }
 
-        // ดึงข้อมูลทุก 3 วินาที (เพื่อให้หน้าปัดตัวเลข Card ขยับตลอด)
+        // ดึงข้อมูลทุก 3 วินาที
         setInterval(syncFirebaseData, 3000);
         syncFirebaseData();
 
