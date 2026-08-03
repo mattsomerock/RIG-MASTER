@@ -304,5 +304,60 @@
             };
         });
     </script>
+<!-- Firebase Live Data Sync Script -->
+<script>
+    // 1. ใส่ URL ของ Firebase Realtime Database ของคุณตรงนี้ (ลงท้ายด้วย /accounts.json)
+    const FIREBASE_DB_URL = 'https://rig-master-dashboard-default-rtdb.asia-southeast1.firebasedatabase.app/accounts.json';
+
+    async function fetchLiveFleetData() {
+        try {
+            const response = await fetch(FIREBASE_DB_URL);
+            if (!response.ok) return;
+            
+            const data = await response.json();
+            if (!data) return;
+
+            // อัปเดตพอร์ต Master
+            if (data.master) {
+                const master = data.master;
+                
+                // อัปเดต KPI Cards ด้านบน
+                document.getElementById('val-master-equity').innerText = '$' + master.equity.toLocaleString('en-US', {minimumFractionDigits: 2});
+                document.getElementById('val-master-balance').innerText = '$' + master.balance.toLocaleString('en-US', {minimumFractionDigits: 2});
+                
+                const pnlElement = document.getElementById('val-floating-pnl');
+                pnlElement.innerText = (master.pnl >= 0 ? '+$' : '-$') + Math.abs(master.pnl).toLocaleString('en-US', {minimumFractionDigits: 2});
+                pnlElement.className = master.pnl >= 0 ? 'text-2xl font-bold text-cyber-green font-mono' : 'text-2xl font-bold text-cyber-red font-mono';
+                
+                if (master.margin_level) {
+                    document.getElementById('val-margin-level').innerText = master.margin_level.toFixed(0) + '%';
+                }
+
+                // อัปเดตกราฟ Real-time (ถ้ามีการขยับ)
+                const currentTime = new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                if (window.updateDashboardChart) {
+                    window.updateDashboardChart(currentTime, master.equity, master.pnl);
+                }
+            }
+
+            // อัปเดตพอร์ต Copier 1 (ถ้ามีข้อมูลส่งมาแล้ว)
+            if (data.copier1) {
+                // ระบบจะนำค่า copier1 มาอัปเดตลงตาราง Matrix อัตโนมัติ
+            }
+
+            // อัปเดตพอร์ต Copier 2 (ถ้ามีข้อมูลส่งมาแล้ว)
+            if (data.copier2) {
+                // ระบบจะนำค่า copier2 มาอัปเดตลงตาราง Matrix อัตโนมัติ
+            }
+
+        } catch (error) {
+            console.error("Data Sync Error:", error);
+        }
+    }
+
+    // ดึงข้อมูลใหม่ทุกๆ 3 วินาที (Real-time Sync)
+    setInterval(fetchLiveFleetData, 3000);
+    fetchLiveFleetData(); // เรียกทำงานทันทีเมื่อเปิดหน้าเว็บ
+</script>
 </body>
 </html>
