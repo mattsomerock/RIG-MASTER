@@ -62,14 +62,14 @@
                 <div>
                     <div class="flex items-center space-x-2">
                         <h1 class="font-heading font-bold text-lg md:text-xl tracking-wide text-white flex items-center gap-2">
-                            RIG MASTER <span class="text-xs px-2 py-0.5 rounded bg-cyber-cyan/10 border border-cyber-cyan/40 text-cyber-cyan font-mono hidden sm:inline-block">GRID ENGINE 1:500</span>
+                            RIG MASTER <span class="text-xs px-2 py-0.5 rounded bg-cyber-cyan/10 border border-cyber-cyan/40 text-cyber-cyan font-mono hidden sm:inline-block">MASTER ACCOUNT ONLY</span>
                         </h1>
                     </div>
                     <p class="text-xs text-slate-400 font-mono flex items-center gap-2">
                         <span class="inline-block w-2 h-2 rounded-full bg-cyber-green pulse-live"></span>
                         <span class="hidden sm:inline">MT5 CONNECTED</span>
                         <span class="text-slate-600">|</span>
-                        <span>EQUIVALENT MARGIN MODE</span>
+                        <span>GRID ENGINE 1:500</span>
                     </p>
                 </div>
             </div>
@@ -86,41 +86,29 @@
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto w-full px-4 lg:px-8 py-6 flex-grow space-y-6">
 
-        <!-- Overview KPI Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Overview KPI Cards (ลดเหลือ 3 Card เฉพาะพอร์ต Master) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="bg-cyber-card/80 border border-cyber-border rounded-xl p-5 relative overflow-hidden">
-                <div class="text-slate-400 text-xs font-mono mb-1">MASTER EQUITY / BALANCE</div>
-                <div class="text-2xl font-bold text-white font-mono" id="val-master-equity">$10,500.00</div>
-                <div class="text-xs text-slate-400 font-mono mt-1">Balance: <span class="text-slate-200" id="val-master-balance">$10,000.00</span></div>
-                <div class="text-xs text-cyber-green font-mono mt-2 flex items-center gap-1">
-                    <i class="fa-solid fa-arrow-trend-up"></i> +5.0% Account Growth
-                </div>
+                <div class="text-slate-400 text-xs font-mono mb-1">EQUITY / BALANCE</div>
+                <div class="text-2xl font-bold text-white font-mono" id="val-master-equity">SYNCING...</div>
+                <div class="text-xs text-slate-400 font-mono mt-1">Balance: <span class="text-slate-200" id="val-master-balance">--</span></div>
             </div>
 
             <div class="bg-cyber-card/80 border border-cyber-border rounded-xl p-5 relative overflow-hidden">
                 <div class="text-slate-400 text-xs font-mono mb-1">FLOATING PnL (GRID POSITIONS)</div>
-                <div class="text-2xl font-bold text-cyber-green font-mono" id="val-floating-pnl">+$380.50</div>
+                <div class="text-2xl font-bold text-cyber-cyan font-mono" id="val-floating-pnl">SYNCING...</div>
                 <div class="text-xs text-slate-400 font-mono mt-1">Total Active Grid Positions</div>
                 <div class="text-xs text-cyber-cyan font-mono mt-2 flex items-center gap-1" id="val-open-orders">
-                    <i class="fa-solid fa-layer-group"></i> 8 Open Orders
+                    <i class="fa-solid fa-layer-group"></i> 0 Open Orders
                 </div>
             </div>
 
             <div class="bg-cyber-card/80 border border-cyber-border rounded-xl p-5 relative overflow-hidden">
-                <div class="text-slate-400 text-xs font-mono mb-1">FLEET TOTAL EQUITY</div>
-                <div class="text-2xl font-bold text-white font-mono" id="val-fleet-equity">$13,230.00</div>
-                <div class="text-xs text-slate-400 font-mono mt-1">Master + 2 Copiers Combined</div>
-                <div class="text-xs text-slate-300 font-mono mt-2 flex items-center gap-1">
-                    <i class="fa-solid fa-server"></i> 3/3 Accounts Active
-                </div>
-            </div>
-
-            <div class="bg-cyber-card/80 border border-cyber-border rounded-xl p-5 relative overflow-hidden">
-                <div class="text-slate-400 text-xs font-mono mb-1">EQUIVALENT MARGIN LEVEL</div>
-                <div class="text-2xl font-bold text-cyber-cyan font-mono" id="val-margin-level">2,450%</div>
-                <div class="text-xs text-slate-400 font-mono mt-1">Normalized Leverage: 1:500</div>
+                <div class="text-slate-400 text-xs font-mono mb-1">ACCOUNT MARGIN LEVEL</div>
+                <div class="text-2xl font-bold text-cyber-cyan font-mono" id="val-margin-level">SYNCING...</div>
+                <div class="text-xs text-slate-400 font-mono mt-1">Leverage: 1:500</div>
                 <div class="text-xs text-cyber-green font-mono mt-2 flex items-center gap-1">
-                    <i class="fa-solid fa-shield-halved"></i> Safety Cushion Optimal
+                    <i class="fa-solid fa-shield-halved"></i> Real-time Monitoring
                 </div>
             </div>
         </div>
@@ -147,85 +135,25 @@
 
         <!-- Real-Time Chart Section -->
         <div class="bg-cyber-card/90 border border-cyber-border rounded-xl p-5 relative">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                 <div>
                     <h3 class="font-heading font-semibold text-lg text-white flex items-center gap-2">
                         <i class="fa-solid fa-chart-line text-cyber-cyan"></i>
-                        Real-Time Equity & Floating PnL Performance
+                        Equity & Floating PnL Performance
                     </h3>
-                    <p class="text-xs text-slate-400 font-mono">Live tick updates synced with MT5 Grid Engine</p>
+                    <p class="text-xs text-slate-400 font-mono">Dual-Axis Chart | Synced with MT5</p>
                 </div>
-                <div class="flex items-center space-x-2 font-mono text-xs">
-                    <span class="px-2.5 py-1 rounded bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan">M1 Live Tick</span>
-                    <span class="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-slate-400">1:500 Normalized</span>
+                <!-- Time Frame Controls -->
+                <div class="flex items-center space-x-1 font-mono text-xs bg-slate-900/80 p-1 rounded-lg border border-slate-700">
+                    <button onclick="changeChartInterval('live', 3000)" id="btn-tf-live" class="tf-btn px-3 py-1.5 rounded bg-cyber-cyan/20 border border-cyber-cyan/50 text-cyber-cyan transition-colors">Live (3s)</button>
+                    <button onclick="changeChartInterval('m1', 60000)" id="btn-tf-m1" class="tf-btn px-3 py-1.5 rounded bg-transparent text-slate-400 hover:text-white transition-colors">1 Min</button>
+                    <button onclick="changeChartInterval('m5', 300000)" id="btn-tf-m5" class="tf-btn px-3 py-1.5 rounded bg-transparent text-slate-400 hover:text-white transition-colors">5 Min</button>
                 </div>
             </div>
             
             <!-- Chart Canvas -->
-            <div class="w-full h-[280px] sm:h-[320px]">
+            <div class="w-full h-[320px] sm:h-[380px]">
                 <canvas id="realtimeEquityChart"></canvas>
-            </div>
-        </div>
-
-        <!-- Live Multi-Account Matrix Table -->
-        <div class="bg-cyber-card/90 border border-cyber-border rounded-xl p-5">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="font-heading font-semibold text-lg text-white flex items-center gap-2">
-                    <i class="fa-solid fa-network-wired text-cyber-cyan"></i>
-                    Live Multi-Account Matrix (Equivalent Margin Mode)
-                </h3>
-                <span class="text-xs font-mono text-slate-400 hidden sm:inline-block">Auto Sync: 3s</span>
-            </div>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full text-left font-mono text-xs sm:text-sm">
-                    <thead>
-                        <tr class="bg-cyber-dark text-cyber-cyan border-b border-cyber-border">
-                            <th class="p-3">Account Name</th>
-                            <th class="p-3">Role</th>
-                            <th class="p-3">Leverage</th>
-                            <th class="p-3">Equity / Balance</th>
-                            <th class="p-3">Floating PnL</th>
-                            <th class="p-3">Equivalent Margin</th>
-                            <th class="p-3 text-center">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-800">
-                        <!-- Master Row -->
-                        <tr class="bg-cyber-cyan/5">
-                            <td class="p-3 font-bold text-white flex items-center gap-2">
-                                <i class="fa-solid fa-crown text-cyber-amber text-xs"></i>
-                                Rig Master Main
-                            </td>
-                            <td class="p-3"><span class="text-cyber-cyan font-bold">MASTER</span></td>
-                            <td class="p-3 text-white">1:500</td>
-                            <td class="p-3 text-white">$10,500 / $10,000</td>
-                            <td class="p-3 text-cyber-green font-bold">+$500.00</td>
-                            <td class="p-3 text-cyber-cyan">100% (Base)</td>
-                            <td class="p-3 text-center"><span class="bg-cyber-green/20 text-cyber-green px-2.5 py-1 rounded text-xs">HEALTHY</span></td>
-                        </tr>
-                        <!-- Copier 1 -->
-                        <tr>
-                            <td class="p-3 text-slate-200">Copier Account #1</td>
-                            <td class="p-3 text-slate-400">FOLLOWER</td>
-                            <td class="p-3 text-white">1:500</td>
-                            <td class="p-3 text-white">$2,150 / $2,000</td>
-                            <td class="p-3 text-cyber-green font-bold">+$150.00</td>
-                            <td class="p-3 text-slate-300">100% Synced</td>
-                            <td class="p-3 text-center"><span class="bg-cyber-green/20 text-cyber-green px-2.5 py-1 rounded text-xs">HEALTHY</span></td>
-                        </tr>
-                        <!-- Copier 2 -->
-                        <tr>
-                            <td class="p-3 text-slate-200">Copier Account #2</td>
-                            <td class="p-3 text-slate-400">FOLLOWER</td>
-                            <td class="p-3 text-white">1:500</td>
-                            <td class="p-3 text-white">$580 / $500</td>
-                            <td class="p-3 text-cyber-green font-bold">+$80.00</td>
-                            <td class="p-3 text-slate-300">100% Synced</td>
-                            <td class="p-3 text-center"><span class="bg-cyber-green/20 text-cyber-green px-2.5 py-1 rounded text-xs">HEALTHY</span></td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
 
@@ -233,76 +161,122 @@
 
     <!-- Footer -->
     <footer class="border-t border-cyber-border/30 bg-cyber-black py-4 px-4 text-center text-xs font-mono text-slate-500">
-        © 2026 RIG MASTER GRID TRADING ENGINE | EQUIVALENT MARGIN MONITORED
+        © 2026 RIG MASTER GRID TRADING ENGINE | MASTER ACCOUNT ONLY
     </footer>
 
-    <!-- Chart Setup & API Sync Script -->
+    <!-- Script Configurations -->
     <script>
+        let chartInstance = null;
+        let chartUpdateIntervalMs = 3000; // Default to Live (3s)
+        let lastChartUpdateTime = 0;
+
+        // ฟังก์ชันเปลี่ยน Time Frame ของกราฟ
+        window.changeChartInterval = function(tfId, ms) {
+            chartUpdateIntervalMs = ms;
+            
+            // ล้างสีปุ่มเดิม
+            document.querySelectorAll('.tf-btn').forEach(btn => {
+                btn.className = 'tf-btn px-3 py-1.5 rounded bg-transparent text-slate-400 hover:text-white transition-colors';
+            });
+            // ไฮไลต์ปุ่มที่ถูกเลือก
+            const activeBtn = document.getElementById('btn-tf-' + tfId);
+            activeBtn.className = 'tf-btn px-3 py-1.5 rounded bg-cyber-cyan/20 border border-cyber-cyan/50 text-cyber-cyan transition-colors';
+        };
+
         document.addEventListener('DOMContentLoaded', function () {
             const ctx = document.getElementById('realtimeEquityChart').getContext('2d');
             
             const equityGradient = ctx.createLinearGradient(0, 0, 0, 300);
-            equityGradient.addColorStop(0, 'rgba(0, 240, 255, 0.4)');
+            equityGradient.addColorStop(0, 'rgba(0, 240, 255, 0.3)');
             equityGradient.addColorStop(1, 'rgba(0, 240, 255, 0.0)');
 
-            // Initial Data arrays
+            // Initial Empty Data arrays
             const labels = [];
             const equityData = [];
             const pnlData = [];
 
-            const chart = new Chart(ctx, {
+            chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [
                         {
-                            label: 'Master Equity ($)',
+                            label: 'Equity ($)',
                             data: equityData,
                             borderColor: '#00f0ff',
                             borderWidth: 2,
                             backgroundColor: equityGradient,
                             fill: true,
-                            tension: 0.3,
-                            pointRadius: 3,
-                            pointBackgroundColor: '#00f0ff'
+                            tension: 0.4, // ทำให้กราฟดูสมูทขึ้น
+                            pointRadius: 2,
+                            pointBackgroundColor: '#00f0ff',
+                            yAxisID: 'y' // ผูกกับแกน Y ซ้าย
                         },
                         {
                             label: 'Floating PnL ($)',
                             data: pnlData,
                             borderColor: '#22c55e',
                             borderWidth: 1.5,
-                            borderDash: [4, 4],
+                            borderDash: [5, 5],
                             fill: false,
-                            tension: 0.3,
-                            pointRadius: 0
+                            tension: 0.4,
+                            pointRadius: 2,
+                            yAxisID: 'y1' // ผูกกับแกน Y ขวา
                         }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
                     plugins: {
                         legend: { labels: { color: '#94a3b8', font: { family: 'JetBrains Mono', size: 11 } } },
-                        tooltip: { mode: 'index', intersect: false, backgroundColor: '#070c18', titleColor: '#00f0ff', bodyColor: '#f3f4f6', borderColor: 'rgba(0,240,255,0.3)', borderWidth: 1 }
+                        tooltip: { backgroundColor: '#070c18', titleColor: '#00f0ff', bodyColor: '#f3f4f6', borderColor: 'rgba(0,240,255,0.3)', borderWidth: 1 }
                     },
                     scales: {
-                        x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 10 } } },
-                        y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 10 } } }
+                        x: { 
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
+                            ticks: { color: '#64748b', font: { family: 'JetBrains Mono', size: 10 }, maxTicksLimit: 15 } 
+                        },
+                        // แกน Y ฝั่งซ้าย (สำหรับ Equity)
+                        y: { 
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: 'Equity ($)', color: '#00f0ff', font: { family: 'JetBrains Mono', size: 10 } },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
+                            ticks: { color: '#00f0ff', font: { family: 'JetBrains Mono', size: 10 } },
+                            grace: '5%' // เผื่อขอบบนล่างไม่ให้กราฟติดขอบ
+                        },
+                        // แกน Y ฝั่งขวา (สำหรับ Floating PnL)
+                        y1: { 
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: 'Floating PnL ($)', color: '#22c55e', font: { family: 'JetBrains Mono', size: 10 } },
+                            grid: { drawOnChartArea: false }, // ซ่อนเส้น Grid ไม่ให้ทับซ้อนกัน
+                            ticks: { color: '#22c55e', font: { family: 'JetBrains Mono', size: 10 } },
+                            grace: '5%'
+                        }
                     }
                 }
             });
 
             window.updateDashboardChart = function(timeLabel, newEquity, newPnL) {
-                chart.data.labels.push(timeLabel);
-                chart.data.datasets[0].data.push(newEquity);
-                chart.data.datasets[1].data.push(newPnL);
+                chartInstance.data.labels.push(timeLabel);
+                chartInstance.data.datasets[0].data.push(newEquity);
+                chartInstance.data.datasets[1].data.push(newPnL);
 
-                if (chart.data.labels.length > 20) {
-                    chart.data.labels.shift();
-                    chart.data.datasets[0].data.shift();
-                    chart.data.datasets[1].data.shift();
+                // เก็บประวัติสูงสุด 30 แท่ง
+                if (chartInstance.data.labels.length > 30) {
+                    chartInstance.data.labels.shift();
+                    chartInstance.data.datasets[0].data.shift();
+                    chartInstance.data.datasets[1].data.shift();
                 }
-                chart.update();
+                chartInstance.update();
             };
         });
 
@@ -315,7 +289,7 @@
                 if (data && data.master) {
                     const master = data.master;
 
-                    // Update Top Cards
+                    // 1. อัปเดตตัวเลขบน Card ด้านบน (อัปเดตตลอดเวลาทุก 3 วินาที)
                     document.getElementById('val-master-equity').innerText = '$' + master.equity.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                     document.getElementById('val-master-balance').innerText = '$' + master.balance.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                     
@@ -325,16 +299,20 @@
 
                     document.getElementById('val-margin-level').innerText = master.margin_level.toLocaleString('en-US', {minimumFractionDigits: 2}) + '%';
                     
-                    // Update Open Orders
                     if(master.open_orders !== undefined) {
                         document.getElementById('val-open-orders').innerHTML = `<i class="fa-solid fa-layer-group"></i> ${master.open_orders} Open Orders`;
                     }
 
-                    // Update Chart
-                    const now = new Date();
-                    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
-                    if (window.updateDashboardChart) {
-                        window.updateDashboardChart(timeStr, master.equity, master.pnl);
+                    // 2. อัปเดตกราฟ (เช็ก Time Frame ที่เลือกก่อนวาดจุดใหม่)
+                    const nowMs = Date.now();
+                    if (nowMs - lastChartUpdateTime >= chartUpdateIntervalMs) {
+                        const now = new Date();
+                        const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
+                        
+                        if (window.updateDashboardChart) {
+                            window.updateDashboardChart(timeStr, master.equity, master.pnl);
+                            lastChartUpdateTime = nowMs; // บันทึกเวลาล่าสุดที่วาดกราฟ
+                        }
                     }
                 }
             } catch (error) {
@@ -342,7 +320,7 @@
             }
         }
 
-        // ดึงข้อมูลทุก 3 วินาที
+        // ดึงข้อมูลทุก 3 วินาที (เพื่อให้หน้าปัดตัวเลข Card ขยับตลอด)
         setInterval(syncFirebaseData, 3000);
         syncFirebaseData();
 
